@@ -39,9 +39,6 @@ _POW2: Final[int] = 2
 # <Base2DFigure> for hinting.
 TriangleT = TypeVar("TriangleT", bound="TriangleMixin")
 
-_CF = TypeVar("_CF", bound="AbcFigure", contravariant=True)
-_F = TypeVar("_F", bound="AbcFigure", covariant=True)
-
 
 class ImpossibleDimention(Exception):
     """Raises if one of args <= 0."""
@@ -106,7 +103,7 @@ class Circle(CircleMixin, Base2DFigure):
 
     def __init__(self, radius: ParamT) -> None:
         self._radius = radius
-        if not _args_bigger_or_eq_zero(self._radius):
+        if not _args_bigger_as_zero(self._radius):
             raise ImpossibleDimention(
                     "Dimentions shold be bigger as zero."
                     )
@@ -133,7 +130,7 @@ class Triangle(TriangleMixin, Base2DFigure):
         self._leg_b = leg_b
         self._hpt = hopotenuse
         self._tol = rel_tol or _DEF_TOLERANCE
-        if not _args_bigger_or_eq_zero(
+        if not _args_bigger_as_zero(
                 self._leg_a,
                 self._leg_b,
                 self._hpt,
@@ -174,7 +171,7 @@ class Rectangle(RectangleMixin, Base2DFigure):
     def __init__(self, side_a: ParamT, side_b: ParamT) -> None:
         self._side_a = side_a
         self._side_b = side_b
-        if not _args_bigger_or_eq_zero(
+        if not _args_bigger_as_zero(
                 self._side_a,
                 self._side_b,
                 ):
@@ -196,7 +193,7 @@ class Square(SquareMixin, Base2DFigure):
 
     def __init__(self, side: ParamT) -> None:
         self._side = side
-        if not _args_bigger_or_eq_zero(self._side):
+        if not _args_bigger_as_zero(self._side):
             raise ImpossibleDimention(
                     "Dimentions shold be bigger as zero."
                     )
@@ -208,7 +205,7 @@ class Square(SquareMixin, Base2DFigure):
         return cast(AreaT, math.pow(self._side, _POW2))
 
 
-def _args_bigger_or_eq_zero(*args) -> bool:
+def _args_bigger_as_zero(*args) -> bool:
     """Check that args are bigger as zero."""
     for a in args:
         if a <= 0:
