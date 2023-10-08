@@ -1,6 +1,6 @@
 import pytest
 
-from figures import Triangle, ImpossibleDimention
+from figures import Triangle, ImpossibleDimention, new_triangle
 
 
 @pytest.mark.xfail
@@ -22,7 +22,6 @@ def test_area_calculated_correct(args: tuple, area: float, tol: float) -> None:
 
 
 def test_is_right_triangle(right_triangle: Triangle) -> None:
-    """default tol in <figures> pack is 1e-3."""
     assert right_triangle.is_right_triangle() is True
 
 
@@ -43,3 +42,16 @@ def test_raises_impossible_dims() -> None:
     """area will have no sence if args <= 0."""
     with pytest.raises(ImpossibleDimention):
         Triangle(-1.0, 6.0, 1.0)
+
+
+@pytest.mark.parametrize(
+        "args,area,tol",
+        [
+            ((2.0, 3.5, 4.1), 3.49, 1e-2),
+            ((3.5, 3.6, 3.85), 5.73, 1e-2),
+            ]
+        )
+def test_new_triangle_created_correct(args: tuple, area: float, tol: float) -> None:
+    nt = new_triangle(*args)
+    assert isinstance(nt, Triangle) is True, "not circle"
+    assert nt.area() == pytest.approx(area, tol)

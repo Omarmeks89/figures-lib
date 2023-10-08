@@ -44,13 +44,11 @@ _F = TypeVar("_F", bound="AbcFigure", covariant=True)
 
 
 class ImpossibleDimention(Exception):
-    """Raises if one of args < 0."""
+    """Raises if one of args <= 0."""
     pass
 
 
 class AbcFigure(ABC):
-    """provide interface
-    for all of childs."""
 
     @abstractmethod
     def area(self) -> AreaT: pass
@@ -163,9 +161,12 @@ class Triangle(TriangleMixin, Base2DFigure):
     def area(self) -> AreaT:
         """Heron`s method (we know all 3 sides)."""
         p = sum((self._leg_a, self._leg_b, self._hpt)) / 2
-        return math.sqrt(
-            p * (p - self._leg_a) * (p - self._leg_b) * (p - self._hpt)
-            )
+        return cast(
+                AreaT,
+                math.sqrt(
+                    p * (p - self._leg_a) * (p - self._leg_b) * (p - self._hpt)
+                    )
+                )
 
 
 class Rectangle(RectangleMixin, Base2DFigure):
@@ -188,7 +189,7 @@ class Rectangle(RectangleMixin, Base2DFigure):
             )
 
     def area(self) -> AreaT:
-        return self._side_a * self._side_b
+        return cast(AreaT, self._side_a * self._side_b)
 
 
 class Square(SquareMixin, Base2DFigure):
@@ -204,7 +205,7 @@ class Square(SquareMixin, Base2DFigure):
         return f"class {type(self).__name__}(side={self._side})"
 
     def area(self) -> AreaT:
-        return math.pow(self._side, _POW2)
+        return cast(AreaT, math.pow(self._side, _POW2))
 
 
 def _args_bigger_or_eq_zero(*args) -> bool:
@@ -230,7 +231,7 @@ def new_triangle(
         ) -> Triangle:
     """base factory func for circle creation.
     Prefer using that func creating object directly."""
-    return Triangle(leg_a, leg_b, hopotenuse)
+    return Triangle(leg_a, leg_b, hopotenuse, rel_tol=rel_tolerance)
 
 
 def new_square(side: ParamT) -> Square:
