@@ -44,6 +44,21 @@ Triangle class Triangle(leg_a=2.0, leg_b=2.0, hopotenuse=2.8283) have angle 90 d
 Area is 2.000
 ```
 
+We can calculate area in runtime, it`s not depended on a figure type:
+
+```python
+
+from typing import Sequence
+from figures.figures import Base2DFigure
+
+
+def runtime_area_calculation(figures: Sequence[Base2DFigure, ...]) -> None:
+    """example of runtime usage."""
+    for idx, fig in enumerate(figures):
+        print(f"POS [{idx}] | FIGURE: {fig:<16} | AREA: {fig.area():<8}")
+
+```
+
 You can create `wheel` because of pure python:
 
 ```bash
