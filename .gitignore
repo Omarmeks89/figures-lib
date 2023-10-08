@@ -1,0 +1,5 @@
+fig-env
+__pycache__
+wheel
+*.egg*
+
