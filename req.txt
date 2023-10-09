@@ -1,8 +1,17 @@
--e git+ssh://git@github.com/Omarmeks89/figures-lib.git@af3e5768592488a75efc3782e2afcbb63ac12343#egg=figures
+-e git+ssh://git@github.com/Omarmeks89/figures-lib.git@120f19b9983cef178c42d431a4de93a7a0d66be8#egg=figures
 iniconfig==2.0.0
 mypy==1.5.1
 mypy-extensions==1.0.0
+numpy==1.26.0
 packaging==23.2
+pandas==2.1.1
 pluggy==1.3.0
+py4j==0.10.9.7
+pyarrow==13.0.0
+pyspark==3.5.0
 pytest==7.4.2
+python-dateutil==2.8.2
+pytz==2023.3.post1
+six==1.16.0
 typing_extensions==4.8.0
+tzdata==2023.3
