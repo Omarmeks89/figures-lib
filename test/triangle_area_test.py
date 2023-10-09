@@ -1,6 +1,7 @@
 import pytest
 
 from figures import Triangle, ImpossibleDimention, _new_triangle
+from figures import is_triangle_right
 
 
 @pytest.mark.xfail
@@ -23,6 +24,10 @@ def test_area_calculated_correct(args: tuple, area: float, tol: float) -> None:
 
 def test_is_right_triangle(right_triangle: Triangle) -> None:
     assert right_triangle.is_right_triangle() is True
+
+
+def test_is_right_triangle_func_is_correct() -> None:
+    assert is_triangle_right(2.0, 2.0, 2.8283, rel_tolerance=1e-2) is True
 
 
 @pytest.mark.parametrize(

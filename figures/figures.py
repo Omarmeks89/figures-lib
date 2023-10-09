@@ -3,13 +3,11 @@ from enum import Enum
 from abc import ABC, abstractmethod
 from dataclasses import dataclass
 from typing import (
-        TypeVar,
         TypeAlias,
         cast,
         Optional,
         Union,
         Final,
-        List,
         Mapping,
         Callable,
         ClassVar,
@@ -25,13 +23,13 @@ __all__ = (
         "ImpossibleDimention",
         "FigureSpecError",
         "FigureTypeError",
-        "calculate_area",
+        "calculate_figure_area",
         "is_triangle_right",
-        "circle_area",
-        "square_area",
-        "triangle_area",
+        "calculate_circle_area",
+        "calculate_square_area",
+        "calculate_triangle_area",
         "build_figure_spec",
-        "rectangle_area",
+        "calculate_rectangle_area",
         )
 
 
@@ -279,22 +277,22 @@ def _new_rectangle(side_a: ParamT, side_b: ParamT) -> Rectangle:
     return Rectangle(side_a, side_b)
 
 
-def circle_area(radius: ParamT) -> AreaT:
+def calculate_circle_area(radius: ParamT) -> AreaT:
     """calculate circle area."""
     return _new_circle(radius).area()
 
 
-def square_area(side: ParamT) -> AreaT:
+def calculate_square_area(side: ParamT) -> AreaT:
     """calculate square area."""
     return _new_square(side).area()
 
 
-def triangle_area(leg_a: ParamT, leg_b: ParamT, hopotenuse: ParamT) -> AreaT:
+def calculate_triangle_area(leg_a: ParamT, leg_b: ParamT, hopotenuse: ParamT) -> AreaT:
     """calculate triangle area."""
     return _new_triangle(leg_a, leg_b, hopotenuse).area()
 
 
-def rectangle_area(side_a: ParamT, side_b: ParamT) -> AreaT:
+def calculate_rectangle_area(side_a: ParamT, side_b: ParamT) -> AreaT:
     """calculate reactangle area."""
     return _new_rectangle(side_a, side_b).area()
 
@@ -326,10 +324,10 @@ class _TypeSwitch(_TypeMapper):
     """switch type for internal using."""
 
     _tmap: ClassVar[Mapping[FigureType, Callable[..., AreaT]]] = {
-            FigureType.SQUARE: square_area,
-            FigureType.TRIANGLE: triangle_area,
-            FigureType.CIRCLE: circle_area,
-            FigureType.RECTANGLE: rectangle_area,
+            FigureType.SQUARE: calculate_square_area,
+            FigureType.TRIANGLE: calculate_triangle_area,
+            FigureType.CIRCLE: calculate_circle_area,
+            FigureType.RECTANGLE: calculate_rectangle_area,
             }
 
     @classmethod
@@ -365,10 +363,11 @@ class _ArgsCounter(_TypeMapper):
 
     @classmethod
     def get_args_count(cls, ftype: FigureType) -> int:
+        """get args count from preset."""
         return cls._args_cnt_map[ftype]
 
 
-def calculate_area(spec: FigureSpec) -> AreaT:
+def calculate_figure_area(spec: FigureSpec) -> AreaT:
     """calculate area without knowledge
     about exact figure type."""
     if _TypeSwitch.fig_type_contains(spec.ftype):
