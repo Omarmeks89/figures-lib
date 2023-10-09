@@ -1,10 +1,6 @@
 ## Pyspark task
 
-So, no DF found in task, i implement my own
-DF-s. Final DF return as pair of <product><category>
-where product without category is NULL.
-
-Output contains two DF, because i`ve made
+I`ve made
 two (a little diferent) queries, depend on
 situation we can choose between them.
 
