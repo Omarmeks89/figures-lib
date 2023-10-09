@@ -2,7 +2,7 @@
 
 ![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54)
 
-Small lib implements geometric figures like square, circle, rectangle and so on. No external libs used, pure python only. Lib contains factories for each figure type, i recommed to use them instead of creating figures directly. So, some example of usage below:
+Small lib implements calculation area of geometric figures like square, circle, rectangle and so on. No external libs used, pure python only.
 
 ### Usage (sample):
 
