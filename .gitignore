@@ -2,5 +2,4 @@ fig-env
 __pycache__
 wheel
 *.egg*
-main.py
 
