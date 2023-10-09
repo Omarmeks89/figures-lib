@@ -1,6 +1,6 @@
 import pytest
 
-from figures import Square, ImpossibleDimention, new_square
+from figures import Square, ImpossibleDimention, _new_square
 
 
 def test_rectangle_area_calc_correct(simp_square: Square) -> None:
@@ -20,6 +20,6 @@ def test_rectangle_raises_impossible_dim() -> None:
             ]
         )
 def test_new_square_working_correct(side: float, area: float, tol: float) -> None:
-    ns = new_square(side)
+    ns = _new_square(side)
     assert isinstance(ns, Square) is True, "not square"
     assert ns.area() == pytest.approx(area, tol)

@@ -5,6 +5,8 @@ from figures import (
         Circle,
         Rectangle,
         Square,
+        FigureType,
+        FigureSpec,
         )
 
 
@@ -32,3 +34,35 @@ def simp_rectangle() -> Rectangle:
 @pytest.fixture(scope="session")
 def simp_square() -> Square:
     return Square(1.0)
+
+
+@pytest.fixture(scope="session")
+def circ_spec() -> FigureSpec:
+    return FigureSpec(
+            ftype=FigureType.CIRCLE,
+            args=(1.0, ),
+            )
+
+
+@pytest.fixture(scope="session")
+def triangle_spec() -> FigureSpec:
+    return FigureSpec(
+            ftype=FigureType.TRIANGLE,
+            args=(2.0, 2.0, 2.8283),
+            )
+
+
+@pytest.fixture(scope="session")
+def square_spec() -> FigureSpec:
+    return FigureSpec(
+            ftype=FigureType.SQUARE,
+            args=(3.0, ),
+            )
+
+
+@pytest.fixture(scope="session")
+def rectangle_spec() -> FigureSpec:
+    return FigureSpec(
+            ftype=FigureType.RECTANGLE,
+            args=(3.0, 4.0),
+            )

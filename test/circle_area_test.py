@@ -1,6 +1,6 @@
 import pytest
 
-from figures import Circle, ImpossibleDimention, new_circle
+from figures import Circle, ImpossibleDimention, _new_circle
 
 
 def test_simp_circle_area_as_pi(simp_circle: Circle) -> None:
@@ -34,6 +34,6 @@ def test_circle_area_calc_correct(rad: float, area: float, tol: float) -> None:
             ]
         )
 def test_new_circle_created_correct(rad: float, area: float, tol: float) -> None:
-    nc = new_circle(rad)
+    nc = _new_circle(rad)
     assert isinstance(nc, Circle) is True, "not circle"
     assert nc.area() == pytest.approx(area, tol)

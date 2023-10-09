@@ -1,6 +1,6 @@
 import pytest
 
-from figures import Triangle, ImpossibleDimention, new_triangle
+from figures import Triangle, ImpossibleDimention, _new_triangle
 
 
 @pytest.mark.xfail
@@ -52,6 +52,6 @@ def test_raises_impossible_dims() -> None:
             ]
         )
 def test_new_triangle_created_correct(args: tuple, area: float, tol: float) -> None:
-    nt = new_triangle(*args)
+    nt = _new_triangle(*args)
     assert isinstance(nt, Triangle) is True, "not circle"
     assert nt.area() == pytest.approx(area, tol)

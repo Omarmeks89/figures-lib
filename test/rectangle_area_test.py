@@ -1,6 +1,6 @@
 import pytest
 
-from figures import Rectangle, ImpossibleDimention, new_rectangle
+from figures import Rectangle, ImpossibleDimention, _new_rectangle
 
 
 def test_rectangle_area_calc_correct(simp_rectangle: Rectangle) -> None:
@@ -20,6 +20,6 @@ def test_rectangle_raises_impossible_dim() -> None:
             ]
         )
 def test_new_rectangle_working_correct(sides: float, area: float, tol: float) -> None:
-    nr = new_rectangle(*sides)
+    nr = _new_rectangle(*sides)
     assert isinstance(nr, Rectangle) is True, "not rectangle"
     assert nr.area() == pytest.approx(area, tol)
